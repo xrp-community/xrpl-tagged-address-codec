@@ -1,4 +1,4 @@
-# XRPL Tagged Address Codec [![npm version](https://badge.fury.io/js/xrpl-tagged-address-codec.svg)](https://www.npmjs.com/xrpl-tagged-address-codec)
+# XRPL Tagged Address Codec [![npm version](https://badge.fury.io/js/xrpl-tagged-address-codec.svg?1)](https://www.npmjs.com/xrpl-tagged-address-codec)
 
 #### Encode and Decode an XRPL account address and destination tag to/from X-formatted (tagged) address.
 
