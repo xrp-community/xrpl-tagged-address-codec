@@ -54,6 +54,21 @@ describe('XRPL Tagged Adress Codec', () => {
     })
   })
 
+  describe('Error handling', () => {
+    it('should only accept an object', () => {
+      expect(() => {
+        // @ts-ignore
+        const e = Encode(null)
+      }).toThrow('Input should contain object')
+    })
+    it('should rquire the `account` key', () => {
+      expect(() => {
+        // @ts-ignore
+        const e = Encode({address: 'x'})
+      }).toThrow('Input should contain `account`')
+    })
+  })
+
   describe('Utils', () => {
     it('should encode toHex', () => {
       const computed = utils.toHex(new Uint32Array([100, 3, 200]))
