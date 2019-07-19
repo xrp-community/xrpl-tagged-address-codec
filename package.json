@@ -1,6 +1,6 @@
 {
   "name": "xrpl-tagged-address-codec",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Encode and Decode an XRPL account address and destination tag to/from X-formatted (tagged) address",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
