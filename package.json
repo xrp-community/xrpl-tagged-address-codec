@@ -33,12 +33,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/WietseWind/xrpl-tagged-address-codec.git"
+    "url": "git://github.com/xrp-community/xrpl-tagged-address-codec.git"
   },
   "bugs": {
-    "url": "https://github.com/WietseWind/xrpl-tagged-address-codec/issues"
+    "url": "https://github.com/xrp-community/xrpl-tagged-address-codec/issues"
   },
-  "homepage": "https://github.com/WietseWind/xrpl-tagged-address-codec#readme",
+  "homepage": "https://github.com/xrp-community/xrpl-tagged-address-codec#readme",
   "license": "MIT",
   "readmeFilename": "README.md",
   "keywords": [
