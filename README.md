@@ -12,6 +12,9 @@ This package allows encoding and decoding from an XRPL address and destination t
 
 ## Use
 
+ - [Browserified sample](https://jsfiddle.net/WietseWind/05rpvbag/)
+ - [RunKit sample in node](https://runkit.com/wietsewind/5cbf111b51e3ee00127b2b59)
+
 ### 1. Import
 
 ##### Node
@@ -71,7 +74,15 @@ The output will be a destination object containing the untagged address (r....),
 
 Run npm run prepublish to clean, lint, test and build. Or just run npm run build, npm run test or npm run lint.
 
-Tests are in `./test/`
+Tests are in `./test`. Run `tsc -w` if you want are developing and want to auto-build to `./dist` when you make changes on the fly.
+
+Scripts:
+
+ - Build: `npm run build`, output: `./dist`
+ - Test: `npm run test`
+ - Lint: `npm run lint`
+ - Clean, test, lint and build: `npm run prepublish`
+ - Browserify: `npm run browserify`, output: `dist/xrpl-tagged-address-codec-browser.js`
 
 ## Credits
 
