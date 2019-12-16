@@ -16,6 +16,6 @@ export default function Decode(encodedDestination: string): types.Destination {
     tag: tagTypeHex === '01'
       ? String(utils.uInt32LE_ToUInt32(tagHex))
       : null,
-    testnet: computed.IsTestnet(encodedDestination)
+    test: computed.IsTestAddress(encodedDestination)
   }
 }

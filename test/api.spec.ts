@@ -120,7 +120,7 @@ describe('XRPL Tagged Adress Codec', () => {
             const encoded = Encode({
               account,
               tag: t.tag,
-              testnet: isTestnet
+              test: isTestnet
             })
             const taggedAddress = isTestnet
               ? t.encoded.testnet
@@ -142,7 +142,7 @@ describe('XRPL Tagged Adress Codec', () => {
               tag: typeof t.tag === 'string' || typeof t.tag === 'number'
                 ? String(t.tag)
                 : null,
-              testnet: isTestnet
+              test: isTestnet
             })
           })
         })

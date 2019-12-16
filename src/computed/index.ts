@@ -5,18 +5,18 @@ import * as types from '../types'
 
 const CodecOutputLength = 29
 
-const IsTestnet = (destination: types.Destination | string): boolean => {
+const IsTestAddress = (destination: types.Destination | string): boolean => {
   if (typeof destination === 'string' && destination.match(/^T/)) {
     return true
   }
-  if (typeof destination === 'object' && destination.testnet === true) {
+  if (typeof destination === 'object' && destination.test === true) {
     return true
   }
   return false
 }
 
 const CodecOptions = (destination: types.Destination | string): types.CodecOptions => {
-  const char = IsTestnet(destination)
+  const char = IsTestAddress(destination)
     ? 'T'
     : 'X'
   return {
@@ -27,5 +27,5 @@ const CodecOptions = (destination: types.Destination | string): types.CodecOptio
 
 export {
   CodecOptions,
-  IsTestnet
+  IsTestAddress
 }

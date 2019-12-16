@@ -53,11 +53,11 @@ import * as codec from 'xrpl-tagged-address-codec'
 const tagged = Encode({
   account: 'rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY',
   tag: 1337,
-  testnet: false
+  test: false
 })
 ```
 
-The output will be a tagged address (string). The `tag` and `testnet` can be omitted, rendering `tag` to be **null** and `testnet` to be **false**.
+The output will be a tagged address (string). The `tag` and `test` parameters can be omitted, rendering `tag` to be **null** and `test` to be **false**.
 
 
 #### Decode a tagged address:
@@ -68,7 +68,7 @@ const untagged = Decode(tagged)
 
 ```
 
-The output will be a destination object containing the untagged address (r....), the destination tag (null or a string containing the destination tag) and a testnet (bool) indicator.
+The output will be a destination object containing the untagged address (r....), the destination tag (null or a string containing the destination tag) and a test (bool) indicator.
 
 ## Development
 
