@@ -8,14 +8,14 @@ const encodeDecodeTests = [
     title: 'without tag',
     encoded: {
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2gYsjNFQLKYW33DzBm',
-      testnet: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwLZzuUG5rZnaewsahi'
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwLZzuUG5rZnaewsahi'
     }
   },
   {
     title: 'with null tag',
     encoded: {
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2gYsjNFQLKYW33DzBm',
-      testnet: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwLZzuUG5rZnaewsahi'
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwLZzuUG5rZnaewsahi'
     },
     tag: null
   },
@@ -23,7 +23,7 @@ const encodeDecodeTests = [
     title: 'with tag zero (0, number)',
     encoded: {
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2m4Er6SnvjVLpMWPjR',
-      testnet: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwRQUBetPbyrvXSTuxU'
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwRQUBetPbyrvXSTuxU'
     },
     tag: 0
   },
@@ -31,7 +31,7 @@ const encodeDecodeTests = [
     title: 'with tag 13371337 (number)',
     encoded: {
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2qwGkhgc48zzcx6Gkr',
-      testnet: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwVUDvp3vhpXbNhLwJi'
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwVUDvp3vhpXbNhLwJi'
     },
     tag: 13371337
   },
@@ -39,7 +39,7 @@ const encodeDecodeTests = [
     title: 'with tag "13371337" (string)',
     encoded: {
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2qwGkhgc48zzcx6Gkr',
-      testnet: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwVUDvp3vhpXbNhLwJi'
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwVUDvp3vhpXbNhLwJi'
     },
     tag: '13371337'
   }
@@ -103,16 +103,16 @@ describe('XRPL Tagged Adress Codec', () => {
         const e = Decode('Xxxxxxxxxxxx')
       }).toThrow('checksum_invalid')
     })
-    it('should detect an invalid tagged testnet address', () => {
+    it('should detect an invalid tagged test address', () => {
       expect(() => {
         const e = Decode('Tttttttttttt')
       }).toThrow('checksum_invalid')
     })
   })
 
-  const nets = ['livenet', 'testnet']
+  const nets = ['livenet', 'test']
   nets.forEach(n => {
-    const isTestnet = n === 'testnet'
+    const isTest = n === 'test'
     describe(n, () => {
       describe('Encoding (' + n + ')', () => {
         encodeDecodeTests.forEach(t => {
@@ -120,10 +120,10 @@ describe('XRPL Tagged Adress Codec', () => {
             const encoded = Encode({
               account,
               tag: t.tag,
-              testnet: isTestnet
+              test: isTest
             })
-            const taggedAddress = isTestnet
-              ? t.encoded.testnet
+            const taggedAddress = isTest
+              ? t.encoded.test
               : t.encoded.livenet
             expect(encoded).toEqual(taggedAddress)
           })
@@ -133,8 +133,8 @@ describe('XRPL Tagged Adress Codec', () => {
       describe('Decoding (' + n + ')', () => {
         encodeDecodeTests.forEach(t => {
           it('should decode ' + t.title, () => {
-            const taggedAddress = isTestnet
-              ? t.encoded.testnet
+            const taggedAddress = isTest
+              ? t.encoded.test
               : t.encoded.livenet
             const decoded = Decode(taggedAddress)
             expect(decoded).toEqual({
@@ -142,7 +142,7 @@ describe('XRPL Tagged Adress Codec', () => {
               tag: typeof t.tag === 'string' || typeof t.tag === 'number'
                 ? String(t.tag)
                 : null,
-              testnet: isTestnet
+              test: isTest
             })
           })
         })

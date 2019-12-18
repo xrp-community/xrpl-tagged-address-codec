@@ -11,14 +11,14 @@ console.log('Decoded', untagged)
 
 console.log()
 
-const taggedTestnet = Encode({
+const taggedTest = Encode({
   account: 'rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY',
   tag: 1337,
-  testnet: true
+  test: true
 })
-console.log('Encoded for Testnet', taggedTestnet)
+console.log('Encoded for test address', taggedTest)
 
-const untaggedTestnet = Decode(taggedTestnet)
-console.log('Decoded for Testnet', untaggedTestnet)
+const untaggedTest = Decode(taggedTest)
+console.log('Decoded for test address', untaggedTest)
 
 console.log()

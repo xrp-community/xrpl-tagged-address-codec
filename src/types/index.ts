@@ -3,7 +3,7 @@
 type Destination = {
   account: string
   tag?: null | number | string
-  testnet?: boolean
+  test?: boolean
 }
 
 type CodecOptions = {
