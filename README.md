@@ -12,8 +12,8 @@ This package allows encoding and decoding from an XRPL address and destination t
 
 ## Use
 
- - [Browserified sample](https://jsfiddle.net/WietseWind/05rpvbag/)
- - [RunKit sample in node](https://runkit.com/wietsewind/5cbf111b51e3ee00127b2b59)
+ - [Browserified sample](https://jsfiddle.net/WietseWind/)
+ - [RunKit sample in node](https://runkit.com/wietsewind/)
 
 ### 1. Import
 
@@ -51,8 +51,8 @@ import * as codec from 'xrpl-tagged-address-codec'
 
 ```
 const tagged = Encode({
-  account: 'rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY',
-  tag: 1337,
+  account: 'rLSn6Z3T8uCxbcd1oxwfGQN1Fdn5CyGujK',
+  tag: 6185432,
   test: false
 })
 ```
@@ -63,7 +63,7 @@ The output will be a tagged address (string). The `tag` and `test` can be omitte
 #### Decode a tagged address:
 
 ```
-const tagged = 'XVLhHMPHU98es4dbozjVtdWzVrDjtV8xvjGQTYPiAx6gwDC'
+const tagged = 'rLSn6Z3T8uCxbcd1oxwfGQN1Fdn5Cy'
 const untagged = Decode(tagged)
 
 ```
