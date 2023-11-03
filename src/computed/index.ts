@@ -3,7 +3,7 @@
 import * as utils from '../utils'
 import * as types from '../types'
 
-const CodecOutputLength = 29
+const CodecOutputLength = 37
 
 const IsTest = (destination: types.Destination | string): boolean => {
   if (typeof destination === 'string' && destination.match(/^T/)) {

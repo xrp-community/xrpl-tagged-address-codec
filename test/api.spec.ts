@@ -4,12 +4,14 @@ import codec from 'ripple-address-codec'
 
 const account = 'rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY'
 const encodeDecodeTests = [
+  // No Network ID
   {
     title: 'without tag',
     encoded: {
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2gYsjNFQLKYW33DzBm',
       test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwLZzuUG5rZnaewsahi'
-    }
+    },
+    networkID: null
   },
   {
     title: 'with null tag',
@@ -17,7 +19,8 @@ const encodeDecodeTests = [
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2gYsjNFQLKYW33DzBm',
       test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwLZzuUG5rZnaewsahi'
     },
-    tag: null
+    tag: null,
+    networkID: null
   },
   {
     title: 'with tag zero (0, number)',
@@ -25,7 +28,8 @@ const encodeDecodeTests = [
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2m4Er6SnvjVLpMWPjR',
       test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwRQUBetPbyrvXSTuxU'
     },
-    tag: 0
+    tag: 0,
+    networkID: null
   },
   {
     title: 'with tag 13371337 (number)',
@@ -33,7 +37,8 @@ const encodeDecodeTests = [
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2qwGkhgc48zzcx6Gkr',
       test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwVUDvp3vhpXbNhLwJi'
     },
-    tag: 13371337
+    tag: 13371337,
+    networkID: null
   },
   {
     title: 'with tag "13371337" (string)',
@@ -41,7 +46,44 @@ const encodeDecodeTests = [
       livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2qwGkhgc48zzcx6Gkr',
       test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwVUDvp3vhpXbNhLwJi'
     },
-    tag: '13371337'
+    tag: '13371337',
+    networkID: null
+  },
+  // Network ID
+  {
+    title: 'without tag     »» [ with network id 123 ]',
+    encoded: {
+      livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PDmLtxsy23iRGyYEyDRg',
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjLzvuDApSXeo2fZEVhh'
+    },
+    networkID: '123'
+  },
+  {
+    title: 'with null tag     »» [ with network id null ]',
+    encoded: {
+      livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2gYsjNFQLKYW33DzBm',
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwLZzuUG5rZnaewsahi'
+    },
+    tag: null,
+    networkID: null
+  },
+  {
+    title: 'with tag zero (0, number)     »» [ with network id 9999999 ]',
+    encoded: {
+      livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PDmRj9LSBqDLudKPRHn8',
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjMnmaWPe3t2SDySjrXA'
+    },
+    tag: 0,
+    networkID: '9999999'
+  },
+  {
+    title: 'with tag "13371337" (string)     »» [ with network id 0 ]',
+    encoded: {
+      livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PDmVXBhoRzKdzkFX5SZ7',
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjM9Z3NktHz1XMMALj7p'
+    },
+    tag: '13371337',
+    networkID: '0'
   }
 ]
 
@@ -80,10 +122,10 @@ describe('XRPL Tagged Adress Codec', () => {
     })
     it('should encode uInt32 to UInt32LE', () => {
       const computed = utils.uInt32_ToUInt32LE(1337)
-      expect(computed).toEqual('3905000000000000')
+      expect(computed).toEqual('39050000')
     })
     it('should decode UInt32 to uInt32LE', () => {
-      const computed = utils.uInt32LE_ToUInt32('3905000000000000')
+      const computed = utils.uInt32LE_ToUInt32('39050000')
       expect(computed).toEqual(1337)
     })
     it('should be able to compute a prefix', () => {
@@ -120,6 +162,7 @@ describe('XRPL Tagged Adress Codec', () => {
             const encoded = Encode({
               account,
               tag: t.tag,
+              networkID: t?.networkID,
               test: isTest
             })
             const taggedAddress = isTest
@@ -142,7 +185,8 @@ describe('XRPL Tagged Adress Codec', () => {
               tag: typeof t.tag === 'string' || typeof t.tag === 'number'
                 ? String(t.tag)
                 : null,
-              test: isTest
+              test: isTest,
+              networkID: t?.networkID
             })
           })
         })

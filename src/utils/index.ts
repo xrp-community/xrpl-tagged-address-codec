@@ -1,6 +1,7 @@
 'use strict'
 
 import codec from 'ripple-address-codec'
+import * as crypto from 'crypto'
 
 function toHex (bytes: Uint32Array): string {
   return Buffer.from(bytes).toString('hex').toUpperCase()
@@ -11,7 +12,7 @@ function toBytes (hex: string): Uint32Array {
 }
 
 function uInt32_ToUInt32LE (integer: number): string {
-  const buf = Buffer.alloc(8)
+  const buf = Buffer.alloc(4)
   buf.writeUInt32LE(integer, 0)
   return buf.toString('hex').toUpperCase()
 }
@@ -41,10 +42,43 @@ function findPrefix (desiredPrefix: string, payloadLength: number): number | Uin
   return version
 }
 
+function makeChecksum(hex: string): string {
+    if (hex.length % 2 === 1) {
+      hex = '0' + hex
+    }
+
+    let ret = Buffer.from(
+      crypto.createHash('sha256')
+        .update(
+          crypto.createHash('sha256')
+            .update(Buffer.from(hex, 'hex'))
+              .digest()).digest()).slice(0,4).toString('hex').toUpperCase()
+
+    if (ret.length < 8) {
+      ret = '0'.repeat(8 - ret.length)
+    }
+
+    return ret
+}
+
+function addChecksum(bytes: Uint32Array): Uint32Array {
+    return new Uint32Array(
+      Buffer.concat(
+        [
+          Buffer.from(bytes),
+          Buffer.from(makeChecksum(toHex(bytes)), 'hex').slice(0,4)
+        ]
+      ).toJSON().data
+    )
+}
+
+
 export {
   toHex,
   toBytes,
   uInt32_ToUInt32LE,
   uInt32LE_ToUInt32,
-  findPrefix
+  findPrefix,
+  makeChecksum,
+  addChecksum
 }
