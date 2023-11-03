@@ -26,6 +26,6 @@ export default function Encode(destination: types.Destination): string {
 
   const bytes: Uint32Array = utils.addChecksum(utils.toBytes(
       (destination.test ? '0493' : '0544') + accountHex + tagTypeHex + tagHex + nidHex))
-  
+
   return codec.codecs.ripple.encode(bytes)
 }
