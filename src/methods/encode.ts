@@ -18,6 +18,7 @@ export default function Encode(destination: types.Destination): string {
     : Number(destination.networkID)
 
   const accountHex: string = utils.toHex(codec.decodeAddress(account))
+
   const tagTypeHex: string = tag === null
     ? (nid === null ? '00' : '80')
     : (nid === null ? '01' : '81')

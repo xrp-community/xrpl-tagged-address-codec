@@ -26,10 +26,10 @@ export default function Decode(encodedDestination: string): types.Destination {
   return {
     account: codec.encodeAddress(utils.toBytes(accountHex)),
     tag: tagTypeHex === '01' || tagTypeHex === '81'
-      ? String(utils.uInt32LE_ToUInt32(tagHex))
+      ? String(utils.uInt32LE_ToUInt32(tagHex) || 0)
       : null,
     networkID: tagTypeHex === '80' || tagTypeHex === '81'
-      ? String(utils.uInt32LE_ToUInt32(nidHex))
+      ? String(utils.uInt32LE_ToUInt32(nidHex) || 0)
       : null,
     test: isTest
   }
