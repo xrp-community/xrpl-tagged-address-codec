@@ -4,6 +4,7 @@ import codec from 'ripple-address-codec'
 
 const account = 'rPEPPER7kfTD9w2To4CQk6UCfuHM9c6GDY'
 const encodeDecodeTests = [
+  // No Network ID
   {
     title: 'without tag',
     encoded: {
@@ -47,6 +48,42 @@ const encodeDecodeTests = [
     },
     tag: '13371337',
     networkID: null
+  },
+  // Network ID
+  {
+    title: 'without tag     »» [ with network id 123 ]',
+    encoded: {
+      livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PDmLtxsy23iRGyYEyDRg',
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjLzvuDApSXeo2fZEVhh'
+    },
+    networkID: '123'
+  },
+  {
+    title: 'with null tag     »» [ with network id null ]',
+    encoded: {
+      livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PD2gYsjNFQLKYW33DzBm',
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjwLZzuUG5rZnaewsahi'
+    },
+    tag: null,
+    networkID: null
+  },
+  {
+    title: 'with tag zero (0, number)     »» [ with network id 9999999 ]',
+    encoded: {
+      livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PDmRj9LSBqDLudKPRHn8',
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjMnmaWPe3t2SDySjrXA'
+    },
+    tag: 0,
+    networkID: '9999999'
+  },
+  {
+    title: 'with tag "13371337" (string)     »» [ with network id 0 ]',
+    encoded: {
+      livenet: 'XV5sbjUmgPpvXv4ixFWZ5ptAYZ6PDmVXBhoRzKdzkFX5SZ7',
+      test: 'TVd2rqMkYL2AyS97NdELcpeiprNBjM9Z3NktHz1XMMALj7p'
+    },
+    tag: '13371337',
+    networkID: '0'
   }
 ]
 
@@ -125,6 +162,7 @@ describe('XRPL Tagged Adress Codec', () => {
             const encoded = Encode({
               account,
               tag: t.tag,
+              networkID: t?.networkID,
               test: isTest
             })
             const taggedAddress = isTest
@@ -148,7 +186,7 @@ describe('XRPL Tagged Adress Codec', () => {
                 ? String(t.tag)
                 : null,
               test: isTest,
-              networkID: null
+              networkID: t?.networkID
             })
           })
         })
