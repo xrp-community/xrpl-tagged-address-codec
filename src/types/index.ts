@@ -3,6 +3,7 @@
 type Destination = {
   account: string
   tag?: null | number | string
+  networkID?: null | number | string
   test?: boolean
 }
 

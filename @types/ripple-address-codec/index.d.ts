@@ -8,8 +8,8 @@ declare module 'ripple-address-codec' {
     alphabet: string
     codec: object
     base: number
-    encode: (bytes: Uint32Array, options: EncodingOptions) => string
-    decode: (address: string, options: EncodingOptions) => Uint32Array
+    encode: (bytes: Uint32Array, options?: EncodingOptions) => string
+    decode: (address: string, options?: EncodingOptions) => Uint32Array
     decodeRaw: (template: string) => Uint32Array
   }
 
